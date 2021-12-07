@@ -4,7 +4,7 @@ const dbUrl = "mongodb+srv://noman:noman123@cluster0.acqet.mongodb.net/fooduproj
 
 const dbConnect = async () => {
   try {
-    await mongoose.connect(dbUrl);
+      await mongoose.connect(dbUrl);
     console.log("connected to db");
   } catch (error) {
     console.log("error in db Connection ....", error);

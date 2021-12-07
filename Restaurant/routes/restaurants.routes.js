@@ -7,7 +7,7 @@ const {
   getRestaurants,
   deleteRestaurant,
   updateRestaurant,
-} = require("../controllers/restaurant.controller.js");
+} = require("../controllers/partner");
 
 router.post("/save-restaurant", saveRestaurant);
 router.get("/get-restaurant/:id", getRestaurantById);

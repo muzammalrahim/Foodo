@@ -3,7 +3,14 @@ const RestaurantModel = require("../models/Restaurant.model.js");
 const saveRestaurant = async (req, res) => {
   try {
 
-    await new RestaurantModel(req.body).save();
+    const {  name , address , phone , image} = req.body;
+
+    await new RestaurantModel({
+      name,
+      address,
+      phone,
+      image,
+    }).save();
 
     return res.json({
       response: "Restaurant Profile saved successfully.",

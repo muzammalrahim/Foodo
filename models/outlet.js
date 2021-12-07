@@ -51,4 +51,4 @@ RestaurantRegisterSchema.pre('save', async function (next) {
     next();
 })
 
-module.exports = mongoose.model('restaurantRegister', RestaurantRegisterSchema);
+module.exports = mongoose.model('Outlet', RestaurantRegisterSchema);

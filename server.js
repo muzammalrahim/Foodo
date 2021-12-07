@@ -3,7 +3,7 @@ const dbConnect = require("./config/db");
 dbConnect();
 
 // const adminRoute = require("./routes/admin");
-// const outletRoute = require("./routes/outlet");
+const outletRoute = require("./routes/outlet");
 const userRoute = require("./routes/user");
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({}));
 
 // app.use("/api/v1/admin", adminRoute);
-// app.use("/api/v1/outlet", outletRoute);
+app.use("/api/v1/outlet", outletRoute);
 app.use("/api/v1/user", userRoute);
 
 const PORT = 3000;

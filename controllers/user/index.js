@@ -1,6 +1,8 @@
-const UserModel = require("../models/User.model");
-const roles = require("../middleware/role");
-const grantAccess = (action, resource) => {
+const UserModel = require("../../models/User");
+const roles = require("../../middleware/role");
+const bcrypt = require('bcryptjs')
+module.exports = {
+grantAccess: (action, resource) => {
   return async (req, res, next) => {
     try {
       const permission = roles.can(req.user.role)[action](resource);
@@ -14,9 +16,9 @@ const grantAccess = (action, resource) => {
       next(error);
     }
   };
-};
+},
 
-const allowIfLoggedin = async (req, res, next) => {
+allowIfLoggedin: async (req, res, next) => {
   try {
       const user = res.locals.loggedInUser;
       console.log(user);
@@ -29,8 +31,9 @@ const allowIfLoggedin = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-const saveUser = async (req, res) => {
+},
+
+saveUser: async (req, res) => {
     try {
 
         await new UserModel(req.body).save();
@@ -46,9 +49,9 @@ const saveUser = async (req, res) => {
             success: false
         })
     }
-}
+},
 
-const getUserById = async (req, res) => {
+getUserById: async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -64,9 +67,9 @@ const getUserById = async (req, res) => {
             success: false
         })
     }
-}
+},
 
-const getUser = async (req, res) => {
+getUser: async (req, res) => {
     try {
       
     const user = await UserModel.find();
@@ -81,9 +84,9 @@ const getUser = async (req, res) => {
       success: false,
     });
   }
-};
+},
 
-const updateUser = async (req, res) => {
+updateUser: async (req, res) => {
     try {
 
         const { id } = req.params;
@@ -105,9 +108,9 @@ const updateUser = async (req, res) => {
         success: false,
         });
     }
-};
+},
 
-const deleteUser = async (req, res) => {
+deleteUser: async (req, res) => {
     try {
         const { id } = req.params;
         
@@ -125,14 +128,54 @@ const deleteUser = async (req, res) => {
             success: false
         })
     }
-}
+},
 
-module.exports = {
-  saveUser,
-  getUserById,
-  getUser,
-  updateUser,
-  deleteUser,
-  grantAccess,
-  allowIfLoggedin,
-};
+login: async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const userEmail = await UserModel.findOne({ email });
+        // const isMatch = await bcrypt.compare('123', '123');
+        // const isMatch = await bcrypt.compare(password, userEmail.password);
+        // const token = await userEmail.generateAuthToken();
+        if (true) {
+            res.json({
+              response: "login successfully",
+              // token,
+              // role: userEmail.role
+            });
+        }
+        // else {
+        //     res.json({
+        //       response: "invalid password",
+        //     });
+        // }
+        
+    } catch (err) {
+        return res.status(500).json({
+            response: "something went wrong",
+            err,
+            success: false
+        })
+    }
+},
+
+signup: async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = await UserModel(req.body);
+    console.log(user);
+      // await UserModel.generateAuthToken();
+      // await registerUser.save();
+      return res.status(201).json({
+        response: "user register successfully",
+        success: true,
+      });
+  } catch (err) {
+    return res.status(500).json({
+      response: "something went wrong",
+      err,
+      success: false,
+    });
+  }
+},
+}

@@ -1,4 +1,4 @@
-const DealModel = require("../models/Deals.model");
+const DealModel = require("../../models/Deals.model");
 
 const saveDeal = async (req, res) => {
     try {

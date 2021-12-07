@@ -7,7 +7,7 @@ const {
     getDeal,
     updateDeal,
     deleteDeal
-} = require("../controllers/deal.controller");
+} = require("../../controllers/deal.controller");
 
 router.post("/save-deal", saveDeal);
 router.get("/get-deal/:id", getDealById);

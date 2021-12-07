@@ -1,4 +1,4 @@
-const RestaurantRegisterModel = require("../models/RestaurantRegister");
+const RestaurantRegisterModel = require("../../models/RestaurantRegister");
 
 const saveRestaurantRegister = async (req, res) => {
     try {

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const {
     saveRestaurantRegister,
-} = require("../controllers/RestaurantRegister");
+} = require("../../controllers/RestaurantRegister");
 
 router.post("/save-registerRestaurant", saveRestaurantRegister);
 

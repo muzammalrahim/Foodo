@@ -1,4 +1,4 @@
-const CheckRestaurantRegister = require("../models/RestaurantRegister");
+const CheckRestaurantRegister = require("../../models/RestaurantRegister");
 const bcrypt = require("bcryptjs");
 const checkRestaurantLogin = async (req, res) => {
   try {

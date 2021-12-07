@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
     checkRestaurantLogin
-} = require("../controllers/restaurantLogin");
+} = require("../../controllers/restaurantLogin");
 
 router.post("/login-restaurant", checkRestaurantLogin);
 

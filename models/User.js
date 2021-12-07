@@ -3,21 +3,21 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const RegisterSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
+const UserSchema = new mongoose.Schema({
+    // firstName: String,
+    // lastName: String,
     password: String,
-    confirmPassword: String,
+    // confirmPassword: String,
     email: {
         type: String,
         unique: [true, "this email is already registered"]
     },
-    role: {
-        type: String,
-        enum: ["user", "admin", "superAdmin"]
-    },
-    address: String,
-    phoneNo: Number,
+    // role: {
+    //     type: String,
+    //     enum: ["user", "admin", "superAdmin"]
+    // },
+    // address: String,
+    // phoneNo: Number,
     tokens: [{
         token: {
             type: String,
@@ -28,7 +28,7 @@ const RegisterSchema = new mongoose.Schema({
 
 // generating tokens
 
-RegisterSchema.methods.generateAuthToken = async function (){
+UserSchema.methods.generateAuthToken = async function (){
     try {
         const token = jwt.sign({_id:this._id.toString()}, process.env.SECRET_KEY);
         // console.log(token);
@@ -41,7 +41,7 @@ RegisterSchema.methods.generateAuthToken = async function (){
 }
 
 // converting password into hash
-RegisterSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
 
     if (this.isModified("password")) {
         // console.log(`the current password is ${this.password}`);
@@ -51,4 +51,4 @@ RegisterSchema.pre('save', async function (next) {
     }
     next();
 })
-module.exports = mongoose.model('register', RegisterSchema);
+module.exports = mongoose.model('User', UserSchema);
